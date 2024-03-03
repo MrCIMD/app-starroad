@@ -6,7 +6,7 @@ const LoadingScreen: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.content}>
         <Image
-          source={require('./images/star_road_logo.png')}
+          source={require('../images/star_road_logo.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   container: {
     width: windowWidth,
     height: windowHeight,
-    backgroundColor: '#0014DB8', // Fondo azul
+    backgroundColor: '#0066FF', // Fondo azul
     justifyContent: 'center',
     alignItems: 'center',
   },
