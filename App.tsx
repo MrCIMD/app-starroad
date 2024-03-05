@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoadingScreen from './screen/LoadingScreen';
 import HomeScreen from './screen/HomeScreen';
 import LoginScreen from './screen/LoginScreen'; // Importa tu componente de pantalla de inicio
+import RegisterScreen from './screen/RegisterScreen';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ const App: React.FC = () => {
           <Stack.Navigator>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Login" component={LoginScreen as any} />
+            <Stack.Screen name="Register" component={RegisterScreen as any}/>
             {/* Agrega otras pantallas aquí si es necesario */}
           </Stack.Navigator>
         </View>

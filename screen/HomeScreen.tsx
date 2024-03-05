@@ -16,6 +16,10 @@ const App = () => {
     navigation.navigate("Login" as never);
   };
 
+  const handleRegisterPress = () => {
+    navigation.navigate("Register" as never);
+  };
+
   const buttonWidth = 100;
 
   return (
@@ -37,7 +41,7 @@ const App = () => {
         <View style={[styles.buttonWrapper, { width: buttonWidth }]}>
           <Button
             title="Register"
-            onPress={() => console.log("Register pressed")}
+            onPress={handleRegisterPress}
             color={Platform.OS === "ios" ? "#FFFFFF" : "#0066FF"}
           />
         </View>
