@@ -6,7 +6,7 @@ import LoadingScreen from './screen/LoadingScreen';
 import HomeScreen from './screen/HomeScreen';
 import LoginScreen from './screen/LoginScreen'; // Importa tu componente de pantalla de inicio
 import RegisterScreen from './screen/RegisterScreen';
-
+import mapScreen from './screen/mapScreen';
 const Stack = createStackNavigator();
 
 const App: React.FC = () => {
@@ -28,7 +28,7 @@ const App: React.FC = () => {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Login" component={LoginScreen as any} />
             <Stack.Screen name="Register" component={RegisterScreen as any}/>
-            {/* Agrega otras pantallas aquí si es necesario */}
+            <Stack.Screen name="MapScreen" component={mapScreen} />
           </Stack.Navigator>
         </View>
       )}

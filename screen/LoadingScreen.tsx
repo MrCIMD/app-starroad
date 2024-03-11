@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   container: {
     width: windowWidth,
     height: windowHeight,
-    backgroundColor: '#0066FF', // Fondo azul
+    backgroundColor: '#FFFFFF', // Fondo azul
     justifyContent: 'center',
     alignItems: 'center',
   },

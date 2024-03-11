@@ -4,16 +4,27 @@ import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
 const LoginScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleLogin = () => {
-    // Aquí puedes agregar la lógica de validación de email y contraseña si lo deseas
-    // Por ahora, simplemente navegaremos a otra pantalla cuando se presione el botón de Login
-    navigation.navigate('OtraPantalla');
+    // Credenciales predefinidas
+    const correctEmail = 'admin@starroad.com';
+    const correctPassword = 'starroad';
+
+    // Validar credenciales
+    if (email === correctEmail && password === correctPassword) {
+      // Credenciales correctas, navegar a la pantalla de mapa
+      navigation.navigate('MapScreen');
+    } else {
+      // Credenciales incorrectas, mostrar mensaje de error
+      setError('Correo electrónico o contraseña incorrectos');
+    }
   };
 
   return (
     <View style={styles.container}>
       <Image source={require('../images/star_road_logo.png')} style={styles.logo} />
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <TextInput
         style={styles.input}
         placeholder="Correo electrónico"
@@ -36,7 +47,7 @@ const LoginScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
+    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
@@ -53,6 +64,10 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
     paddingHorizontal: 10,
+    marginBottom: 10,
+  },
+  errorText: {
+    color: 'red',
     marginBottom: 10,
   },
 });
