@@ -18,6 +18,8 @@ const App: React.FC = () => {
     }, 2000);
   }, []);
 
+  const Stack = createStackNavigator();
+  
   return (
     <NavigationContainer>
       {isLoading ? (

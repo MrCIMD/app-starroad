@@ -1,25 +1,40 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '../firebase-config';
+
 const RegisterScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
-    const [fullName, setFullName] = useState('');
-    const [Username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    //const [fullName, setFullName] = useState('');
+    //const [Username, setUsername] = useState('');
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
     
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
     const handleRegister = () => {
         // Aquí puedes agregar la lógica de validación de email y contraseña si lo deseas
         // Por ahora, simplemente navegaremos a otra pantalla cuando se presione el botón de Login
-        navigation.navigate('OtraPantalla');
+        createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential)=>{
+      console.log('Account created')
+      const user = userCredential.user;
+      console.log(user)
+    })
+    .catch(error => {
+      console.log(error)
+      Alert.alert(error.message)
+    })
       };
 
       return (
         <View style={styles.container}>
         <Image source={require('../images/star_road_logo.png')} style={styles.logo} />
         
-        <TextInput
+        {/* <TextInput
         style={styles.input}
         placeholder="Nombre completo"
         value={fullName}
@@ -30,7 +45,7 @@ const RegisterScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         placeholder="Usuario"
         value={Username}
         onChangeText={setUsername}
-        />
+        /> */}
           <TextInput
         style={styles.input}
         placeholder="Correo electrónico"

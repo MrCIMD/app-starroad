@@ -1,24 +1,43 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
 
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '../firebase-config';
+
+
+
 const LoginScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const [error, setError] = useState('');
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
   const handleLogin = () => {
     // Credenciales predefinidas
-    const correctEmail = 'admin@starroad.com';
-    const correctPassword = 'starroad';
+    /*const correctEmail = 'admin@starroad.com';
+    const correctPassword = 'starroad';*/
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential)=>{
+      console.log('Log in!')
+      const user = userCredential.user;
+      console.log(user)
+      navigation.navigate('MapScreen');
+    })
+    .catch(error => {
+      console.log(error)
+    })
 
     // Validar credenciales
-    if (email === correctEmail && password === correctPassword) {
+   /* if (email === correctEmail && password === correctPassword) {
       // Credenciales correctas, navegar a la pantalla de mapa
       navigation.navigate('MapScreen');
     } else {
       // Credenciales incorrectas, mostrar mensaje de error
       setError('Correo electrónico o contraseña incorrectos');
-    }
+    }*/
   };
 
   return (
@@ -29,7 +48,7 @@ const LoginScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         style={styles.input}
         placeholder="Correo electrónico"
         value={email}
-        onChangeText={setEmail}
+        onChangeText={(text) => setEmail(text)}
         keyboardType="email-address"
         autoCapitalize="none"
       />
@@ -37,7 +56,7 @@ const LoginScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         style={styles.input}
         placeholder="Contraseña"
         value={password}
-        onChangeText={setPassword}
+        onChangeText={(text) => setPassword(text)}
         secureTextEntry
       />
       <Button title="Login" onPress={handleLogin} />
