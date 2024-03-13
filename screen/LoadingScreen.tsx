@@ -11,7 +11,7 @@ const LoadingScreen: React.FC = () => {
           resizeMode="contain"
         />
         <ActivityIndicator size="large" color="#FFFFFF" />
-        <Text style={styles.loadingText}>Cargando...</Text>
+        <Text style={styles.loadingText}>Tu camino siempre iluminado</Text>
       </View>
     </View>
   );
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   loadingText: {
-    color: '#FFFFFF',
+    color: '#000000',
   },
 });
 

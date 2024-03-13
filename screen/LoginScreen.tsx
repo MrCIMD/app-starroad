@@ -1,43 +1,31 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
-
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Importa AsyncStorage
 import { firebaseConfig } from '../firebase-config';
 
-
+const app = initializeApp(firebaseConfig);
 
 const LoginScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
   const handleLogin = () => {
-    // Credenciales predefinidas
-    /*const correctEmail = 'admin@starroad.com';
-    const correctPassword = 'starroad';*/
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential)=>{
-      console.log('Log in!')
-      const user = userCredential.user;
-      console.log(user)
-      navigation.navigate('MapScreen');
-    })
-    .catch(error => {
-      console.log(error)
-    })
-
-    // Validar credenciales
-   /* if (email === correctEmail && password === correctPassword) {
-      // Credenciales correctas, navegar a la pantalla de mapa
-      navigation.navigate('MapScreen');
-    } else {
-      // Credenciales incorrectas, mostrar mensaje de error
-      setError('Correo electrónico o contraseña incorrectos');
-    }*/
+    signInWithEmailAndPassword(getAuth(app), email, password)
+      .then((userCredential) => {
+        console.log('Log in!');
+        const user = userCredential.user;
+        console.log(user);
+        // Guarda el estado de autenticación en AsyncStorage
+        AsyncStorage.setItem('isLoggedIn', 'true');
+        navigation.navigate('MapScreen');
+      })
+      .catch(error => {
+        console.log(error);
+        setError(error.message);
+      });
   };
 
   return (
