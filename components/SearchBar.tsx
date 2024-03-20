@@ -3,9 +3,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Platform, FlatList, Text, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { YELP_API_KEY } from '../apikeys';
-import { Place } from '../screen/mapScreen';
-import * as Location from 'expo-location';
-import PlaceInfoCard from '../components/PlaceInfoCard'; // Importa el componente de tarjeta
+import { Place } from '../types/Place';
 import useLocation from '../context/useLocation';
 
 interface SearchBarProps {

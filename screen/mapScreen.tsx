@@ -6,16 +6,7 @@ import NavBar from '../components/NavBar';
 import SearchBar from '../components/SearchBar';
 import PlaceInfoCard from '../components/PlaceInfoCard';
 import useLocation from '../context/useLocation';
-
-export interface Place {
-  id: string;
-  name: string;
-  latitude: number;
-  longitude: number;
-  image_url?: string;
-  location?: string;
-  display_phone?: string;
-}
+import {Place} from '../types/Place'
 
 const MapScreen = () => {
   const currentLocation = useLocation();
@@ -23,7 +14,7 @@ const MapScreen = () => {
   const [showPlaceInfo, setShowPlaceInfo] = useState(false);
 
   const handleSearch = (query: string) => {
-    // Lógica para buscar lugares
+   
   };
 
   const handleSelectPrediction = (prediction: Place) => {
@@ -52,7 +43,7 @@ const MapScreen = () => {
                 longitude: selectedPlace.longitude,
               }}
               title={selectedPlace.name}
-              pinColor="red"
+              pinColor="blue"
               onPress={() => setShowPlaceInfo(true)}
             />
           )}
