@@ -1,45 +1,71 @@
-import React, { FC } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { AuthenticatedWithBottomTapsParamList, PROFILE_SCREEN } from '../../navigation';
-import { RouteProp } from '@react-navigation/native';
-type ProfileScreenRouteProp = RouteProp<AuthenticatedWithBottomTapsParamList, typeof PROFILE_SCREEN>;
+import React, { FC, useEffect, useState } from 'react';
+import { Button, Platform, StyleSheet, Text, View } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Session, useAuth } from "../../hooks";
 
-type ProfileScreenProps = {
- route: ProfileScreenRouteProp;
+
+const ProfileScreen: FC = () => {
+    const [session, setSession] = useState<Session | null>(null)
+
+    const {getSession} = useAuth();
+
+    /*
+    * TODO - Gestión de usuario
+    * */
+    useEffect(() => {
+        let fetch = true;
+
+        if (fetch) {
+            (async () => {
+                const session = await getSession();
+
+                setSession(session);
+                console.log(session)
+            })()
+        }
+
+        return () => {
+            fetch = false;
+        }
+    }, [])
+    const handleSave = async () => {
+        const data = await AsyncStorage.getItem('isLoggedIn');
+
+        console.log(data)
+    }
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.label}>Nombre de usuario:</Text>
+            <Text style={styles.text}>{session?.displayName}</Text>
+
+            <Text style={styles.label}>Correo electrónico:</Text>
+            <Text style={styles.text}>{session?.email}</Text>
+
+            <Button
+                title="Login"
+                onPress={handleSave}
+                color={Platform.OS === "ios" ? "#FFFFFF" : "#0066FF"}
+            />
+        </View>
+    );
 };
 
-
-const ProfileScreen: FC<ProfileScreenProps> = ({route}) => {
-  const {
-    username,
-    email
-  }  = route.params;
-  return (
-      <View style={styles.container}>
-        <Text style={styles.label}>Nombre de usuario:</Text>
-        <Text style={styles.text}>{username}</Text>
-  
-        <Text style={styles.label}>Correo electrónico:</Text>
-        <Text style={styles.text}>{email}</Text>
-      </View>
-    );
-  };
-
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     label: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginBottom: 5,
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 5,
     },
     text: {
-      fontSize: 16,
-      marginBottom: 20,
+        fontSize: 16,
+        marginBottom: 20,
     },
-  });
-  
-  export default ProfileScreen;
+});
+
+export default ProfileScreen;

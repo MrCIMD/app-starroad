@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { CreateUserPayload, useAuth } from "../../hooks";
+import { CreateUserPayload, useAuth, useNav } from "../../hooks";
 
-const RegisterScreen: React.FC<{ navigation: any }> = ({navigation}) => {
+const RegisterScreen: FC = () => {
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -11,6 +11,7 @@ const RegisterScreen: React.FC<{ navigation: any }> = ({navigation}) => {
     const [error, setError] = useState('');
 
     const {createUser} = useAuth()
+    const {handleGoMap} = useNav();
 
     /**
      * Guarda el nuevo usuario y crea una sesión para acceder a la app
@@ -23,7 +24,7 @@ const RegisterScreen: React.FC<{ navigation: any }> = ({navigation}) => {
         const session = await createUser(payload);
 
         if (session) {
-            navigation.navigate('MapScreen');
+            handleGoMap();
         }
     };
 

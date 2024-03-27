@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useAuth } from "../../hooks";
+import { useAuth, useNav } from "../../hooks";
 
-const LoginScreen: React.FC<{ navigation: any }> = ({navigation}) => {
+const LoginScreen: FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const {login} = useAuth()
+    const {handleGoMap} = useNav();
 
     const handleLogin = async () => {
         const session = await login(email, password);
 
-        if (session) {
-            navigation.navigate('MapScreen');
-        }
+        if (session) handleGoMap();
     };
 
     return (
