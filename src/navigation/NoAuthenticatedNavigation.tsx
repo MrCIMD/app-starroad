@@ -10,9 +10,9 @@ const Stack = createStackNavigator<NoAuthenticatedParamList>();
 const NoAuthenticatedNavigation: FC = () => {
     return(
         <Stack.Navigator>
-            <Stack.Screen name={HOME_SCREEN} component={HomeScreen} />
             <Stack.Screen name={LOGIN_SCREEN} component={LoginScreen} />
             <Stack.Screen name={REGISTER_SCREEN} component={RegisterScreen}/>
+            <Stack.Screen name={HOME_SCREEN} component={HomeScreen} />
           </Stack.Navigator>
     )
 }

@@ -11,8 +11,8 @@ const RootNavigation = () =>{
     return(
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false}}>
-                <Stack.Screen name={AUTHENTICATED_SCREEN} component={AuthenticatedNavigation}/>
                 <Stack.Screen name={NO_AUTHENTICATED_SCREEN} component={NoAuthenticatedNavigation}/>
+                <Stack.Screen name={AUTHENTICATED_SCREEN} component={AuthenticatedNavigation}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

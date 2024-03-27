@@ -17,7 +17,7 @@ export const LOGIN_SCREEN = 'LOGIN_SCREEN';
 /*
  * Pantalla para el inicio de sesión
  * */
-export const REGISTER_SCREEN = 'LOGIN_SCREEN';
+export const REGISTER_SCREEN = 'REGISTER_SCREEN';
 /*
  * Pantalla para recuperar su cuenta
  * */
