@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
 import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Importa AsyncStorage
-import { firebaseConfig } from '../firebase-config';
+import { firebaseConfig } from '../../../firebase-config';
+// import { getReactNativePersistence } from '@react-native-community/async-storage'; // Importa la función getReactNativePersistence
+
+// const persistence = getReactNativePersistence(AsyncStorage);
+
 
 const app = initializeApp(firebaseConfig);
 
-const RegisterScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+const LoginScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleRegister = () => {
-    createUserWithEmailAndPassword(getAuth(app), email, password)
+  const handleLogin = () => {
+    signInWithEmailAndPassword(getAuth(app), email, password)
       .then((userCredential) => {
-        console.log('Account created');
+        console.log('Log in!');
         const user = userCredential.user;
-        console.log(user);
+        console.log(user.displayName);
         // Guarda el estado de autenticación en AsyncStorage
         AsyncStorage.setItem('isLoggedIn', 'true');
         navigation.navigate('MapScreen');
@@ -27,19 +29,18 @@ const RegisterScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       .catch(error => {
         console.log(error);
         setError(error.message);
-        Alert.alert('Error', error.message);
       });
   };
 
   return (
     <View style={styles.container}>
-      <Image source={require('../images/star_road_logo.png')} style={styles.logo} />
+      {<Image source={require('../../images/star_road_logo.png')} style={styles.logo} />}
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <TextInput
         style={styles.input}
         placeholder="Correo electrónico"
         value={email}
-        onChangeText={setEmail}
+        onChangeText={(text) => setEmail(text)}
         keyboardType="email-address"
         autoCapitalize="none"
       />
@@ -47,21 +48,17 @@ const RegisterScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         style={styles.input}
         placeholder="Contraseña"
         value={password}
-        onChangeText={setPassword}
+        onChangeText={(text) => setPassword(text)}
         secureTextEntry
       />
-      <Button title="Register" onPress={handleRegister} />
-      <TouchableOpacity style={styles.facebookButton}>
-        <Icon name="facebook" size={20} color="#fff" />
-        <Text style={styles.facebookButtonText}>Registrarse con Facebook</Text>
-      </TouchableOpacity>
+      <Button title="Login" onPress={handleLogin} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
+    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
@@ -84,21 +81,6 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 10,
   },
-  facebookButton: {
-    backgroundColor: '#1877f2',
-    padding: 10,
-    borderRadius: 4,
-    marginTop: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  facebookButtonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 16,
-    marginLeft: 8,
-  },
 });
 
-export default RegisterScreen;
+export default LoginScreen;

@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Platform, FlatList, Text, TouchableOpacity } from 'react-native';
 import axios from 'axios';
-import { YELP_API_KEY } from '../apikeys';
-import { Place } from '../types/Place';
-import useLocation from '../context/useLocation';
+import { YELP_API_KEY } from '../../apikeys';
+import { Place } from '../../types/Place';
+import useLocation from '../../context/useLocation';
 
 interface SearchBarProps {
   onSearch: (term: string, latitude: number, longitude: number) => void;

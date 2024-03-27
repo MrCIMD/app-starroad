@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoadingScreen from './screen/LoadingScreen';
-import HomeScreen from './screen/HomeScreen';
-import LoginScreen from './screen/LoginScreen'; // Importa tu componente de pantalla de inicio
-import RegisterScreen from './screen/RegisterScreen';
-import mapScreen from './screen/mapScreen';
+import LoadingScreen from './src/screen/NoAuthenticated/LoadingScreen';
+import HomeScreen from './src/screen/NoAuthenticated/HomeScreen';
+import LoginScreen from './src/screen/NoAuthenticated/LoginScreen'; // Importa tu componente de pantalla de inicio
+import RegisterScreen from './src/screen/NoAuthenticated/RegisterScreen';
+import mapScreen from './src/screen/Authenticated/mapScreen';
+import ProfileScreen from './src/screen/Authenticated/ProfileScreen';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import RootNavigation from './src/navigation/RootNavigation';
 const Stack = createStackNavigator();
 
 const App: React.FC = () => {
@@ -21,20 +23,9 @@ const App: React.FC = () => {
   const Stack = createStackNavigator();
   
   return (
-    <NavigationContainer>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <View style={styles.container}>
-          <Stack.Navigator>
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Login" component={LoginScreen as any} />
-            <Stack.Screen name="Register" component={RegisterScreen as any}/>
-            <Stack.Screen name="MapScreen" component={mapScreen} />
-          </Stack.Navigator>
-        </View>
-      )}
-    </NavigationContainer>
+   <SafeAreaProvider>
+     <RootNavigation/>
+   </SafeAreaProvider>
   );
 };
 

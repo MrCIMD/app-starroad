@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import {
   View,
   Image,
@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const App = () => {
+const HomeScreen: FC = () => {
   const navigation = useNavigation();
 
   const handleLoginPress = () => {
@@ -26,8 +26,8 @@ const App = () => {
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Image
-          source={require("../images/star_road_logo.png")}
-          style={styles.logoImage}
+          source={require('../../images/star_road_logo.png')}
+          style={styles.logo}
         />
       </View>
       <View style={styles.buttonsContainer}>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20, // Espacio entre el logo y los botones
   },
-  logoImage: {
+  logo: {
     width: windowWidth * 0.5, // Ajusta el tamaño de la imagen según tus necesidades
     height: windowWidth * 0.5, // Ajusta el tamaño de la imagen según tus necesidades
   },
@@ -90,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default HomeScreen;

@@ -1,14 +1,14 @@
 // MapScreen.tsx
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import NavBar from '../components/NavBar';
-import SearchBar from '../components/SearchBar';
-import PlaceInfoCard from '../components/PlaceInfoCard';
-import useLocation from '../context/useLocation';
-import {Place} from '../types/Place'
+// import NavBar from '../../components/NavBar';
+import SearchBar from '../../components/SearchBar';
+import PlaceInfoCard from '../../components/PlaceInfoCard';
+import useLocation from '../../../context/useLocation';
+import {Place} from '../../../types/Place'
 
-const MapScreen = () => {
+const MapScreen: FC = () => {
   const currentLocation = useLocation();
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   const [showPlaceInfo, setShowPlaceInfo] = useState(false);
@@ -49,7 +49,7 @@ const MapScreen = () => {
           )}
         </MapView>
       )}
-      <NavBar />
+      {/* <NavBar /> */}
       {showPlaceInfo && selectedPlace && <PlaceInfoCard place={selectedPlace} />}
     </View>
   );

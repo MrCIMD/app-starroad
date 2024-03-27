@@ -1,7 +1,7 @@
 // components/PlaceInfoCard.tsx
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { Place } from '../types/Place';
+import { Place } from '../../types/Place';
 
 interface PlaceInfoCardProps {
   place: Place;
