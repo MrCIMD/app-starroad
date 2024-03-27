@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { AuthenticatedWithBottomTapsParamList, HOME_SCREEN, MAP_SCREEN, PROFILE_SCREEN } from '../navigation';
 import ProfileScreen from '../screen/Authenticated/ProfileScreen';
-import MapScreen from '../screen/Authenticated/mapScreen';
+import MapScreen from '../screen/Authenticated/MapScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Tab = createBottomTabNavigator<AuthenticatedWithBottomTapsParamList>();

@@ -1,16 +1,17 @@
-import { createStackNavigator } from "@react-navigation/stack";
 import { FC } from "react";
-import { AuthenticatedParamList,ROUTES_AUTHENTICATED_WITH_BOTTOMTAPS } from "../navigation";
-import TabsNavigation from "./TabsNavigation";
+import { createStackNavigator } from "@react-navigation/stack";
+import { AuthorizationParamList, MAP_SCREEN, PROFILE_SCREEN, } from "../navigation";
+import MapScreen from "../screen/Authenticated/MapScreen";
+import ProfileScreen from "../screen/Authenticated/ProfileScreen";
 
 
-
-const Stack = createStackNavigator<AuthenticatedParamList>();
+const Stack = createStackNavigator<AuthorizationParamList>();
 
 const AuthenticatedNavigation: FC = () => {
-    return(
+    return (
         <Stack.Navigator>
-            <Stack.Screen name={ROUTES_AUTHENTICATED_WITH_BOTTOMTAPS} component={TabsNavigation}/>
+            <Stack.Screen name={MAP_SCREEN} component={MapScreen}/>
+            <Stack.Screen name={PROFILE_SCREEN} component={ProfileScreen}/>
         </Stack.Navigator>
     )
 }

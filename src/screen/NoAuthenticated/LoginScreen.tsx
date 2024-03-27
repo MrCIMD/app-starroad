@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useAuth } from "../../hooks";
-// import { getReactNativePersistence } from '@react-native-community/async-storage'; // Importa la función getReactNativePersistence
-
-// const persistence = getReactNativePersistence(AsyncStorage);
-//
-//
-// const app = initializeApp(firebaseConfig);
 
 const LoginScreen: React.FC<{ navigation: any }> = ({navigation}) => {
     const [email, setEmail] = useState('');
